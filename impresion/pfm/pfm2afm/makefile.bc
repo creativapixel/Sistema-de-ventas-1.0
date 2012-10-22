@@ -1,0 +1,24 @@
+# Makefile for pfm2afm and afm2pfm
+# for Borland C++
+# Russell Lang <rjl@eng.monash.edu.au>
+
+ZIPFILES=README COPYING Makefile Makefile.bc pfm2afm.c pfm2afm.h pfm2afm.exe afm2pfm.c afm2pfm.h afm2pfm.exe
+
+all: afm2pfm.exe pfm2afm.exe
+
+afm2pfm.exe: afm2pfm.c afm2pfm.h
+	bcc afm2pfm.c
+
+pfm2afm.exe: pfm2afm.c pfm2afm.h
+	bcc pfm2afm.c
+
+clean:
+	-del afm2pfm.obj
+	-del afm2pfm.exe
+	-del pfm2afm.obj
+	-del pfm2afm.exe
+
+zip: $(ZIPFILES)
+	-del afm2pfm.zip
+	zip afm2pfm.zip $(ZIPFILES)
+

@@ -1,0 +1,319 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 21-12-2009 a las 23:18:30
+-- Versión del servidor: 5.1.36
+-- Versión de PHP: 5.2.11
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de datos: `bdventas`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cajas`
+--
+
+CREATE TABLE IF NOT EXISTS `cajas` (
+  `caj_id` int(11) NOT NULL AUTO_INCREMENT,
+  `caj_descripcion` varchar(45) DEFAULT NULL,
+  `caj_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`caj_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcar la base de datos para la tabla `cajas`
+--
+
+INSERT INTO `cajas` (`caj_id`, `caj_descripcion`, `caj_eliminado`) VALUES
+(1, 'CAJA 01', '0'),
+(2, 'CAJA 02', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_ventas`
+--
+
+CREATE TABLE IF NOT EXISTS `detalle_ventas` (
+  `detv_id` int(11) NOT NULL,
+  `detv_cantidad` decimal(10,2) DEFAULT NULL,
+  `detv_precio` decimal(10,2) DEFAULT NULL,
+  `detv_importe` decimal(10,2) DEFAULT NULL,
+  `ven_id` int(11) NOT NULL,
+  `pro_id` int(11) NOT NULL,
+  PRIMARY KEY (`detv_id`),
+  KEY `fk_detalle_ventas_ventas1` (`ven_id`),
+  KEY `fk_detalle_ventas_productos1` (`pro_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `detalle_ventas`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lineas`
+--
+
+CREATE TABLE IF NOT EXISTS `lineas` (
+  `lin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lin_descripcion` varchar(50) DEFAULT NULL,
+  `lin_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`lin_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcar la base de datos para la tabla `lineas`
+--
+
+INSERT INTO `lineas` (`lin_id`, `lin_descripcion`, `lin_eliminado`) VALUES
+(1, 'licuadoras', '0'),
+(2, 'HORNOS', '0'),
+(3, 'QWEQ', '1'),
+(4, 'sadsa33', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcas`
+--
+
+CREATE TABLE IF NOT EXISTS `marcas` (
+  `mar_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mar_descripcion` varchar(50) DEFAULT NULL,
+  `mar_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`mar_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcar la base de datos para la tabla `marcas`
+--
+
+INSERT INTO `marcas` (`mar_id`, `mar_descripcion`, `mar_eliminado`) VALUES
+(1, 'SONY', '0'),
+(2, 'PANASONIC', '0'),
+(3, 'RTER', '1'),
+(4, 'SDFDS23', '1'),
+(5, 'fsadas', '1'),
+(6, 'sadas', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE IF NOT EXISTS `permisos` (
+  `per_id` int(11) NOT NULL AUTO_INCREMENT,
+  `per_descripcion` varchar(80) DEFAULT NULL,
+  `per_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`per_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Volcar la base de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`per_id`, `per_descripcion`, `per_eliminado`) VALUES
+(18, 'Registrar Productos', '0'),
+(19, 'Registrar Ingresos', '0'),
+(20, 'Registrar Ventas', '0'),
+(21, 'Asignar Permisos', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `precios`
+--
+
+CREATE TABLE IF NOT EXISTS `precios` (
+  `pre_id` int(11) NOT NULL,
+  `pre_cantidad` decimal(10,2) DEFAULT NULL,
+  `pre_precio` decimal(10,2) DEFAULT NULL,
+  `pro_id` int(11) NOT NULL,
+  `uni_id` int(11) NOT NULL,
+  PRIMARY KEY (`pre_id`),
+  KEY `fk_precios_productos1` (`pro_id`),
+  KEY `fk_precios_unidades1` (`uni_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `precios`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE IF NOT EXISTS `productos` (
+  `pro_id` int(11) NOT NULL,
+  `pro_descripcion` varchar(150) DEFAULT NULL,
+  `pro_stock` varchar(45) DEFAULT NULL,
+  `lin_id` int(11) NOT NULL,
+  `mar_id` int(11) NOT NULL,
+  PRIMARY KEY (`pro_id`),
+  KEY `fk_productos_lineas` (`lin_id`),
+  KEY `fk_productos_marcas1` (`mar_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `productos`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `tipo_usuario` (
+  `tipu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipu_descripcion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`tipu_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcar la base de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`tipu_id`, `tipu_descripcion`) VALUES
+(1, 'ADMINISTRADOR'),
+(2, 'USUARIO DE APOYO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unidades`
+--
+
+CREATE TABLE IF NOT EXISTS `unidades` (
+  `uni_id` int(11) NOT NULL,
+  `uni_descripcion` varchar(50) DEFAULT NULL,
+  `uni_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`uni_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `unidades`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `usu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usu_nombres` varchar(45) DEFAULT NULL,
+  `usu_apellidos` varchar(45) DEFAULT NULL,
+  `usu_direccion` varchar(45) DEFAULT NULL,
+  `usu_telefono` varchar(45) DEFAULT NULL,
+  `usu_usuario` varchar(15) DEFAULT NULL,
+  `usu_clave` varchar(255) DEFAULT NULL,
+  `usu_eliminado` char(1) DEFAULT NULL,
+  `tipu_id` int(11) NOT NULL,
+  PRIMARY KEY (`usu_id`),
+  KEY `fk_usuarios_tipo_usuario1` (`tipu_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcar la base de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`usu_id`, `usu_nombres`, `usu_apellidos`, `usu_direccion`, `usu_telefono`, `usu_usuario`, `usu_clave`, `usu_eliminado`, `tipu_id`) VALUES
+(2, 'Andres', 'Sosa Garcia', 'Zafiros 428 Urb. La Rinconada', '250597', 'andres', '231badb19b93e44f47da1bd64a8147f2', '0', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_permisos`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_permisos` (
+  `per_id` int(11) NOT NULL,
+  `usu_id` int(11) NOT NULL,
+  PRIMARY KEY (`per_id`,`usu_id`),
+  KEY `PERMISOS_has_USUARIOS_FKIndex1` (`per_id`),
+  KEY `PERMISOS_has_USUARIOS_FKIndex2` (`usu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `usuarios_permisos`
+--
+
+INSERT INTO `usuarios_permisos` (`per_id`, `usu_id`) VALUES
+(18, 2),
+(19, 2),
+(20, 2),
+(21, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `ven_id` int(11) NOT NULL,
+  `ven_fecha` date DEFAULT NULL,
+  `ven_anulado` char(1) DEFAULT NULL,
+  `caj_id` int(11) NOT NULL,
+  PRIMARY KEY (`ven_id`),
+  KEY `fk_ventas_cajas1` (`caj_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `ventas`
+--
+
+
+--
+-- Filtros para las tablas descargadas (dump)
+--
+
+--
+-- Filtros para la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  ADD CONSTRAINT `fk_detalle_ventas_productos1` FOREIGN KEY (`pro_id`) REFERENCES `productos` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_detalle_ventas_ventas1` FOREIGN KEY (`ven_id`) REFERENCES `ventas` (`ven_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `precios`
+--
+ALTER TABLE `precios`
+  ADD CONSTRAINT `fk_precios_productos1` FOREIGN KEY (`pro_id`) REFERENCES `productos` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_precios_unidades1` FOREIGN KEY (`uni_id`) REFERENCES `unidades` (`uni_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `fk_productos_lineas` FOREIGN KEY (`lin_id`) REFERENCES `lineas` (`lin_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_productos_marcas1` FOREIGN KEY (`mar_id`) REFERENCES `marcas` (`mar_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_usuarios_tipo_usuario1` FOREIGN KEY (`tipu_id`) REFERENCES `tipo_usuario` (`tipu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `fk_ventas_cajas1` FOREIGN KEY (`caj_id`) REFERENCES `cajas` (`caj_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

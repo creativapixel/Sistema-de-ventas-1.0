@@ -1,0 +1,19 @@
+
+ @media print {
+    .oculto {display:none}
+	.sinborde {border:0px}
+
+
+/*div.page { */
+
+
+
+} 
+
+
+div.page {  
+writing-mode: tb-rl; 
+height: 100%; 
+margin: 80% 0%;
+/*margin-top:0%;*/
+} 

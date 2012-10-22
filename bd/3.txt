@@ -1,0 +1,649 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 04-01-2010 a las 22:44:57
+-- Versión del servidor: 5.1.36
+-- Versión de PHP: 5.2.11
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de datos: `bdventas`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `areas`
+--
+
+CREATE TABLE IF NOT EXISTS `areas` (
+  `are_id` int(11) NOT NULL AUTO_INCREMENT,
+  `are_descripcion` varchar(50) DEFAULT NULL,
+  `are_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`are_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcar la base de datos para la tabla `areas`
+--
+
+INSERT INTO `areas` (`are_id`, `are_descripcion`, `are_eliminado`) VALUES
+(1, 'Punto Venta 01', '0'),
+(2, 'Punto Venta 02', '0'),
+(3, 'Caja 01', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clientes`
+--
+
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `cli_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cli_razonsocial` varchar(100) DEFAULT NULL,
+  `cli_direccion` varchar(100) DEFAULT NULL,
+  `cli_ruc` char(11) DEFAULT NULL,
+  `cli_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`cli_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Volcar la base de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`cli_id`, `cli_razonsocial`, `cli_direccion`, `cli_ruc`, `cli_eliminado`) VALUES
+(1, '-DESCONOCIDO-', NULL, NULL, '0'),
+(2, 'ANDRES SOSA GARCIA', 'zafiros 428 rinconada', '10406791624', '0'),
+(3, 'GARI OMAR PAREDES', '', '', '0'),
+(4, 'ALAN DIAZ BALCAZAR', '', '', '0'),
+(5, 'WALTER LLAQUE', '', '', '0'),
+(6, 'ESTEPHAN ALVARADO', '', '', '0'),
+(7, 'JAIME HERNANDEZ', '', '', '0'),
+(8, 'EDWIN PALOMINO', '', '', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_pedidos`
+--
+
+CREATE TABLE IF NOT EXISTS `detalle_pedidos` (
+  `dped_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_id` int(11) NOT NULL,
+  `ped_id` int(11) NOT NULL,
+  `dped_cantidad` decimal(10,2) DEFAULT NULL,
+  `dped_unidades` decimal(10,2) DEFAULT NULL,
+  `dped_precio_cantidad` decimal(10,2) DEFAULT NULL,
+  `dped_totalcantidad` decimal(10,2) DEFAULT NULL,
+  `dped_preciounidades` decimal(10,2) DEFAULT NULL,
+  `dped_preciototal` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`dped_id`),
+  KEY `detalle_pedidos_FKIndex1` (`ped_id`),
+  KEY `detalle_pedidos_FKIndex2` (`pro_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+
+--
+-- Volcar la base de datos para la tabla `detalle_pedidos`
+--
+
+INSERT INTO `detalle_pedidos` (`dped_id`, `pro_id`, `ped_id`, `dped_cantidad`, `dped_unidades`, `dped_precio_cantidad`, `dped_totalcantidad`, `dped_preciounidades`, `dped_preciototal`) VALUES
+(4, 13, 6, '2.00', '0.00', '48.00', '12.00', '0.00', '48.00'),
+(5, 18, 6, '1.00', '10.00', '420.00', '110.00', '42.00', '462.00'),
+(9, 13, 7, '2.00', '0.00', '48.00', '12.00', '0.00', '48.00'),
+(10, 18, 7, '1.00', '10.00', '420.00', '110.00', '42.00', '462.00'),
+(14, 13, 8, '2.00', '0.00', '48.00', '12.00', '0.00', '48.00'),
+(15, 18, 8, '1.00', '10.00', '420.00', '110.00', '42.00', '462.00'),
+(19, 13, 9, '2.00', '0.00', '48.00', '12.00', '0.00', '48.00'),
+(20, 18, 9, '1.00', '10.00', '420.00', '110.00', '42.00', '462.00'),
+(24, 13, 10, '2.00', '0.00', '48.00', '12.00', '0.00', '48.00'),
+(25, 18, 10, '1.00', '10.00', '420.00', '110.00', '42.00', '462.00'),
+(26, 16, 10, '2.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(27, 15, 10, '10.00', '1.00', '25.00', '11.00', '2.50', '27.50'),
+(31, 13, 11, '2.00', '0.00', '48.00', '12.00', '0.00', '48.00'),
+(32, 18, 11, '1.00', '10.00', '420.00', '110.00', '42.00', '462.00'),
+(33, 16, 11, '2.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(34, 15, 11, '10.00', '1.00', '25.00', '11.00', '2.50', '27.50'),
+(35, 13, 12, '2.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(36, 16, 13, '3.00', '0.00', '36.00', '9.00', '0.00', '36.00'),
+(37, 18, 13, '4.00', '0.00', '20.00', '4.00', '0.00', '20.00'),
+(38, 13, 14, '4.00', '0.00', '192.00', '48.00', '0.00', '192.00'),
+(39, 13, 15, '2.00', '3.00', '96.00', '27.00', '12.00', '108.00'),
+(40, 16, 15, '1.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(41, 18, 15, '1.00', '30.00', '420.00', '130.00', '126.00', '546.00'),
+(42, 13, 16, '2.00', '2.00', '96.00', '26.00', '8.00', '104.00'),
+(43, 13, 17, '1.00', '3.00', '48.00', '15.00', '12.00', '60.00'),
+(44, 18, 17, '1.00', '0.00', '420.00', '100.00', '0.00', '420.00'),
+(45, 17, 18, '100.00', '2.00', '150.00', '102.00', '3.00', '153.00'),
+(47, 18, 18, '100.00', '0.00', '500.00', '100.00', '0.00', '500.00'),
+(49, 26, 18, '1.00', '0.00', '24.00', '1000.00', '0.00', '24.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_ventas`
+--
+
+CREATE TABLE IF NOT EXISTS `detalle_ventas` (
+  `dve_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_id` int(11) NOT NULL,
+  `ven_id` int(11) NOT NULL,
+  `ven_cantidad` decimal(10,2) DEFAULT NULL,
+  `ven_unidades` decimal(10,2) DEFAULT NULL,
+  `ven_precio_cantidad` decimal(10,2) DEFAULT NULL,
+  `ven_totalcantidad` decimal(10,2) DEFAULT NULL,
+  `ven_preciounidades` decimal(10,2) DEFAULT NULL,
+  `ven_preciototal` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`dve_id`),
+  KEY `detalle_ventas_FKIndex1` (`ven_id`),
+  KEY `detalle_ventas_FKIndex2` (`pro_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
+
+--
+-- Volcar la base de datos para la tabla `detalle_ventas`
+--
+
+INSERT INTO `detalle_ventas` (`dve_id`, `pro_id`, `ven_id`, `ven_cantidad`, `ven_unidades`, `ven_precio_cantidad`, `ven_totalcantidad`, `ven_preciounidades`, `ven_preciototal`) VALUES
+(58, 13, 29, '2.00', '3.00', '96.00', '27.00', '12.00', '108.00'),
+(59, 16, 29, '1.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(60, 18, 29, '1.00', '30.00', '420.00', '130.00', '126.00', '546.00'),
+(61, 13, 30, '2.00', '3.00', '96.00', '27.00', '12.00', '108.00'),
+(62, 16, 30, '1.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(63, 18, 30, '1.00', '30.00', '420.00', '130.00', '126.00', '546.00'),
+(64, 13, 31, '2.00', '3.00', '96.00', '27.00', '12.00', '108.00'),
+(65, 16, 31, '1.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(66, 18, 31, '1.00', '30.00', '420.00', '130.00', '126.00', '546.00'),
+(67, 13, 32, '2.00', '3.00', '96.00', '27.00', '12.00', '108.00'),
+(68, 16, 32, '1.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(69, 18, 32, '1.00', '30.00', '420.00', '130.00', '126.00', '546.00'),
+(70, 13, 33, '2.00', '3.00', '96.00', '27.00', '12.00', '108.00'),
+(71, 16, 33, '1.00', '0.00', '24.00', '6.00', '0.00', '24.00'),
+(72, 18, 33, '1.00', '30.00', '420.00', '130.00', '126.00', '546.00'),
+(73, 13, 34, '2.00', '2.00', '96.00', '26.00', '8.00', '104.00'),
+(74, 13, 35, '1.00', '3.00', '48.00', '15.00', '12.00', '60.00'),
+(75, 18, 35, '1.00', '0.00', '420.00', '100.00', '0.00', '420.00'),
+(76, 13, 36, '1.00', '3.00', '48.00', '15.00', '12.00', '60.00'),
+(77, 18, 36, '1.00', '0.00', '420.00', '100.00', '0.00', '420.00'),
+(78, 13, 37, '1.00', '3.00', '48.00', '15.00', '12.00', '60.00'),
+(79, 18, 37, '1.00', '0.00', '420.00', '100.00', '0.00', '420.00'),
+(80, 13, 38, '1.00', '3.00', '48.00', '15.00', '12.00', '60.00'),
+(81, 18, 38, '1.00', '0.00', '420.00', '100.00', '0.00', '420.00'),
+(82, 17, 39, '100.00', '2.00', '150.00', '102.00', '3.00', '153.00'),
+(83, 18, 39, '100.00', '0.00', '500.00', '100.00', '0.00', '500.00'),
+(84, 26, 39, '1.00', '0.00', '24.00', '1000.00', '0.00', '24.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ingresos`
+--
+
+CREATE TABLE IF NOT EXISTS `ingresos` (
+  `ing_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_id` int(11) NOT NULL,
+  `ing_cantidad` int(11) DEFAULT NULL,
+  `ing_fecha` date DEFAULT NULL,
+  PRIMARY KEY (`ing_id`),
+  KEY `ingresos_FKIndex1` (`pro_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Volcar la base de datos para la tabla `ingresos`
+--
+
+INSERT INTO `ingresos` (`ing_id`, `pro_id`, `ing_cantidad`, `ing_fecha`) VALUES
+(2, 9, 3, '2009-12-27'),
+(3, 6, 3, '2009-12-27'),
+(4, 1, 57, '2009-12-27'),
+(5, 10, 100, '2009-12-27'),
+(8, 12, 2000, '2010-01-01'),
+(9, 11, 8000, '2010-01-01'),
+(10, 17, 1000, '2010-01-04'),
+(11, 26, 2000, '2010-01-04'),
+(12, 18, 1000, '2010-01-04');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lineas`
+--
+
+CREATE TABLE IF NOT EXISTS `lineas` (
+  `lin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lin_descripcion` varchar(50) DEFAULT NULL,
+  `lin_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`lin_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Volcar la base de datos para la tabla `lineas`
+--
+
+INSERT INTO `lineas` (`lin_id`, `lin_descripcion`, `lin_eliminado`) VALUES
+(1, 'licuadoras', '1'),
+(2, 'HORNOS', '1'),
+(3, 'QWEQ', '1'),
+(4, 'sadsa33', '1'),
+(5, 'PANASONIC', '1'),
+(6, 'LICUADORAS', '1'),
+(7, 'libreria', '0'),
+(8, 'merceria', '0'),
+(9, 'piñateria', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcas`
+--
+
+CREATE TABLE IF NOT EXISTS `marcas` (
+  `mar_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mar_descripcion` varchar(50) DEFAULT NULL,
+  `mar_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`mar_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Volcar la base de datos para la tabla `marcas`
+--
+
+INSERT INTO `marcas` (`mar_id`, `mar_descripcion`, `mar_eliminado`) VALUES
+(1, 'SONY', '1'),
+(2, 'PANASONIC', '1'),
+(3, 'RTER', '1'),
+(4, 'SDFDS23', '1'),
+(5, 'fsadas', '1'),
+(6, 'sadas', '1'),
+(7, 'PANASONIC', '1'),
+(8, 'justus', '0'),
+(9, 'surco', '0'),
+(10, 'layconza', '0'),
+(11, 'artesco', '0'),
+(12, 'faber castell', '0'),
+(13, 'report', '0'),
+(14, 'atlas', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `ped_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cli_id` int(11) NOT NULL,
+  `ped_fecha` date DEFAULT NULL,
+  `ped_estado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`ped_id`),
+  KEY `pedidos_FKIndex1` (`cli_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+
+--
+-- Volcar la base de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`ped_id`, `cli_id`, `ped_fecha`, `ped_estado`) VALUES
+(1, 1, '2010-01-02', '0'),
+(2, 1, '2010-01-03', '0'),
+(3, 1, '2010-01-03', '2'),
+(4, 1, '2010-01-03', '0'),
+(5, 1, '2010-01-03', '0'),
+(6, 1, '2010-01-03', '2'),
+(7, 1, '2010-01-03', '0'),
+(8, 1, '2010-01-03', '0'),
+(9, 1, '2010-01-03', '0'),
+(10, 1, '2010-01-03', '2'),
+(11, 1, '2010-01-03', '0'),
+(12, 1, '2010-01-03', '2'),
+(13, 1, '2010-01-03', '0'),
+(14, 2, '2010-01-04', '2'),
+(15, 6, '2010-01-04', '0'),
+(16, 7, '2010-01-04', '0'),
+(17, 8, '2010-01-04', '1'),
+(18, 2, '2010-01-04', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE IF NOT EXISTS `permisos` (
+  `per_id` int(11) NOT NULL AUTO_INCREMENT,
+  `per_descripcion` varchar(80) DEFAULT NULL,
+  `per_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`per_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+
+--
+-- Volcar la base de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`per_id`, `per_descripcion`, `per_eliminado`) VALUES
+(18, 'Registrar Productos', '0'),
+(19, 'Registrar Ingresos', '0'),
+(20, 'Registrar Ventas', '0'),
+(21, 'Asignar Permisos', '0'),
+(22, 'Gestionar Usuarios', '0'),
+(23, 'Gestionar Ingresos', '0'),
+(24, 'Gestionar Pedidos', '0'),
+(25, 'Gestionar Ventas', '0'),
+(26, 'Gestionar Backup', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `precios`
+--
+
+CREATE TABLE IF NOT EXISTS `precios` (
+  `pre_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uni_id` int(11) NOT NULL,
+  `pro_id` int(11) NOT NULL,
+  `pre_precio` decimal(10,2) DEFAULT NULL,
+  `pre_eliminado` char(1) NOT NULL,
+  PRIMARY KEY (`pre_id`),
+  KEY `precios_FKIndex1` (`pro_id`),
+  KEY `precios_FKIndex2` (`uni_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
+
+--
+-- Volcar la base de datos para la tabla `precios`
+--
+
+INSERT INTO `precios` (`pre_id`, `uni_id`, `pro_id`, `pre_precio`, `pre_eliminado`) VALUES
+(1, 1, 3, '25.60', '0'),
+(2, 2, 3, '15.80', '0'),
+(3, 2, 3, '25.00', '1'),
+(4, 5, 3, '1.50', '0'),
+(5, 8, 3, '6.00', '0'),
+(6, 3, 11, '10.50', '1'),
+(7, 5, 11, '34.00', '1'),
+(8, 8, 11, '3.00', '0'),
+(9, 8, 12, '34.00', '0'),
+(10, 3, 11, '43.00', '0'),
+(11, 7, 11, '8.00', '0'),
+(12, 1, 11, '9.00', '0'),
+(13, 7, 17, '1.50', '0'),
+(14, 5, 17, '15.00', '0'),
+(15, 3, 26, '3.00', '0'),
+(16, 4, 26, '1.50', '0'),
+(17, 10, 26, '1.00', '0'),
+(18, 1, 26, '24.00', '0'),
+(19, 2, 26, '12.00', '0'),
+(20, 5, 18, '50.00', '0'),
+(21, 6, 18, '25.00', '0'),
+(22, 7, 18, '5.00', '0'),
+(23, 3, 18, '420.00', '0'),
+(24, 4, 18, '210.00', '0'),
+(25, 10, 18, '105.00', '0'),
+(26, 3, 22, '210.00', '0'),
+(27, 4, 22, '105.00', '0'),
+(28, 10, 22, '52.50', '0'),
+(29, 5, 22, '26.00', '0'),
+(30, 6, 22, '13.00', '0'),
+(31, 11, 22, '6.50', '0'),
+(32, 5, 27, '20.00', '0'),
+(33, 6, 27, '10.00', '0'),
+(34, 11, 27, '5.00', '0'),
+(35, 11, 28, '9.00', '0'),
+(36, 7, 28, '3.50', '0'),
+(37, 6, 28, '18.00', '0'),
+(38, 5, 28, '36.00', '0'),
+(39, 4, 25, '1.50', '0'),
+(40, 10, 25, '1.00', '0'),
+(41, 3, 25, '3.00', '0'),
+(42, 1, 25, '25.00', '0'),
+(43, 2, 25, '12.50', '0'),
+(44, 13, 24, '20.00', '0'),
+(45, 14, 24, '10.00', '0'),
+(46, 3, 29, '185.00', '0'),
+(47, 4, 29, '92.50', '0'),
+(48, 10, 29, '46.30', '0'),
+(49, 5, 13, '48.00', '0'),
+(50, 6, 13, '24.00', '0'),
+(51, 11, 13, '12.00', '0'),
+(52, 11, 16, '12.00', '0'),
+(53, 6, 16, '24.00', '0'),
+(54, 5, 16, '48.00', '0'),
+(55, 5, 15, '26.00', '0'),
+(56, 6, 15, '13.00', '0'),
+(57, 11, 15, '6.50', '0'),
+(58, 7, 15, '2.50', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE IF NOT EXISTS `productos` (
+  `pro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_descripcion` varchar(150) DEFAULT NULL,
+  `pro_stock` varchar(45) DEFAULT NULL,
+  `lin_id` int(11) NOT NULL,
+  `mar_id` int(11) NOT NULL,
+  `pro_eliminado` char(1) NOT NULL,
+  PRIMARY KEY (`pro_id`),
+  KEY `fk_productos_lineas` (`lin_id`),
+  KEY `fk_productos_marcas1` (`mar_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+
+--
+-- Volcar la base de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`pro_id`, `pro_descripcion`, `pro_stock`, `lin_id`, `mar_id`, `pro_eliminado`) VALUES
+(1, 'AAAA3', '400', 1, 2, '0'),
+(2, 'HHHHH', '5', 2, 2, '1'),
+(3, 'TTT', '87', 1, 1, '0'),
+(4, 'HKJHKJ', '5', 1, 2, '1'),
+(5, 'KJHHKJHKJ', '6', 1, 2, '1'),
+(6, 'JKHKJH', '10', 1, 1, '0'),
+(7, 'KJHKH', '6', 1, 2, '1'),
+(8, 'HGJG', '7', 2, 2, '1'),
+(9, 'KJKHKJH66', '79', 2, 2, '0'),
+(10, 'HORNO MICROHONDAS ALUMINIO', '100', 2, 2, '0'),
+(11, 'LICUADORA DE 4 NAVAJAS', '8000', 6, 1, '0'),
+(12, 'LICUADORA DE 6 NAVAJAS', '2000', 6, 7, '0'),
+(13, 'ARCHIVADOR OF LOMO ANCHO', '0', 7, 11, '0'),
+(14, 'GRAPAS ARTESCO', '0', 7, 11, '1'),
+(15, 'GRAPAS X 5000 UNIDADES', '0', 7, 11, '0'),
+(16, 'COLORES LARGOS  X 12 UNIDADES', '0', 7, 11, '0'),
+(17, 'ALFILERES ', '898', 7, 11, '0'),
+(18, 'COLORES LARGOS X 12', '900', 7, 12, '0'),
+(19, 'COLORES X 12 CORTOS ', '0', 7, 12, '0'),
+(20, 'PLASTILINA X 12 DELGADAS', '0', 7, 12, '0'),
+(21, 'PLASTILINA JUMBO X 12', '0', 7, 12, '0'),
+(22, 'CUADERNO  A4 X 100 HOJAS CUADRICULADO', '0', 7, 8, '0'),
+(23, 'CUADERNO ESCOLAR X 100 HOJAS CHICO RAYADO', '0', 7, 8, '0'),
+(24, 'PAPEL OFICIO CUADRICULADO ', '0', 7, 8, '0'),
+(25, 'PAPEL BOND A4 BLANCO', '0', 7, 13, '0'),
+(26, 'PAPEL BOND  BLANCO', '1000', 7, 14, '0'),
+(27, 'PLASTILINA DELGADA X 12 ', '0', 7, 10, '0'),
+(28, 'PLASTILINA GRUESA JUMBO X 12', '0', 7, 10, '0'),
+(29, 'CUDERNO A4 X 100 HOJAS ', '0', 7, 9, '0'),
+(30, 'CUADERNO X 100 HOJAS ESCOLAR CHICO', '0', 7, 9, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unidades`
+--
+
+CREATE TABLE IF NOT EXISTS `unidades` (
+  `uni_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uni_descripcion` varchar(50) DEFAULT NULL,
+  `uni_factor` decimal(10,2) DEFAULT NULL,
+  `uni_eliminado` char(1) DEFAULT NULL,
+  PRIMARY KEY (`uni_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+
+--
+-- Volcar la base de datos para la tabla `unidades`
+--
+
+INSERT INTO `unidades` (`uni_id`, `uni_descripcion`, `uni_factor`, `uni_eliminado`) VALUES
+(1, 'MILLAR', '1000.00', '0'),
+(2, '1/2 MILLAR', '500.00', '0'),
+(3, 'CIENTO', '100.00', '0'),
+(4, '1/2 CIENTO', '50.00', '0'),
+(5, 'DOCENA', '12.00', '0'),
+(6, '1/2 DOCENA', '6.00', '0'),
+(7, 'UNIDAD', '1.00', '0'),
+(8, 'GRUESA', '144.00', '0'),
+(9, '1/2 GRUESA', '72.00', '0'),
+(10, '1/4 CIENTO', '25.00', '0'),
+(11, '1/4 DOCENA', '3.00', '0'),
+(12, 'RESMA 500', '500.00', '0'),
+(13, 'RESMA 400', '400.00', '0'),
+(14, '1/2 RESMA 400', '200.00', '0'),
+(15, '1/2 RESMA 500', '250.00', '0'),
+(16, 'KILO', '1000.00', '0'),
+(17, '1/2 KILO', '500.00', '0'),
+(18, '100 GRAMOS', '100.00', '0'),
+(19, '1/4 KILO', '250.00', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `usu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usu_nombres` varchar(45) DEFAULT NULL,
+  `usu_apellidos` varchar(45) DEFAULT NULL,
+  `usu_direccion` varchar(45) DEFAULT NULL,
+  `usu_telefono` varchar(45) DEFAULT NULL,
+  `usu_usuario` varchar(15) DEFAULT NULL,
+  `usu_clave` varchar(255) DEFAULT NULL,
+  `usu_eliminado` char(1) DEFAULT NULL,
+  `usu_tipo` char(1) NOT NULL,
+  PRIMARY KEY (`usu_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcar la base de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`usu_id`, `usu_nombres`, `usu_apellidos`, `usu_direccion`, `usu_telefono`, `usu_usuario`, `usu_clave`, `usu_eliminado`, `usu_tipo`) VALUES
+(2, 'Andres', 'Sosa Garcia', 'Zafiros 428 Urb. La Rinconada', '250597', 'andres', '231badb19b93e44f47da1bd64a8147f2', '0', '1'),
+(4, 'keyla', 'chavez garcia', 'los  zafiros #428 la rinconada', '949348606', 'monjitagrone', '065c076d31b0f9c0655cfc585185c4e3', '0', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_permisos`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_permisos` (
+  `per_id` int(11) NOT NULL,
+  `usu_id` int(11) NOT NULL,
+  PRIMARY KEY (`per_id`,`usu_id`),
+  KEY `PERMISOS_has_USUARIOS_FKIndex1` (`per_id`),
+  KEY `PERMISOS_has_USUARIOS_FKIndex2` (`usu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `usuarios_permisos`
+--
+
+INSERT INTO `usuarios_permisos` (`per_id`, `usu_id`) VALUES
+(18, 2),
+(19, 2),
+(20, 2),
+(21, 2),
+(22, 2),
+(23, 2),
+(24, 2),
+(24, 4),
+(25, 2),
+(26, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `ven_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cli_id` int(11) NOT NULL,
+  `ven_fecha` date DEFAULT NULL,
+  `ven_estado` char(1) DEFAULT NULL,
+  `ped_id` int(11) NOT NULL,
+  `ven_tipodoc` char(1) NOT NULL,
+  `ven_nrodoc` varchar(10) NOT NULL,
+  PRIMARY KEY (`ven_id`),
+  KEY `ventas_FKIndex1` (`cli_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+
+--
+-- Volcar la base de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`ven_id`, `cli_id`, `ven_fecha`, `ven_estado`, `ped_id`, `ven_tipodoc`, `ven_nrodoc`) VALUES
+(29, 6, '2010-01-04', '0', 15, '', ''),
+(30, 6, '2010-01-04', '0', 15, '', ''),
+(31, 6, '2010-01-04', '0', 15, '', ''),
+(32, 6, '2010-01-04', '0', 15, '', ''),
+(33, 6, '2010-01-04', '0', 15, '', ''),
+(34, 7, '2010-01-04', '0', 16, '', ''),
+(35, 8, '2010-01-04', '0', 17, '', ''),
+(36, 8, '2010-01-04', '0', 17, '', ''),
+(37, 8, '2010-01-04', '0', 17, '1', '548'),
+(38, 8, '2010-01-04', '0', 17, '1', '8400'),
+(39, 2, '2010-01-04', '0', 18, '2', '333');
+
+--
+-- Filtros para las tablas descargadas (dump)
+--
+
+--
+-- Filtros para la tabla `detalle_pedidos`
+--
+ALTER TABLE `detalle_pedidos`
+  ADD CONSTRAINT `detalle_pedidos_ibfk_1` FOREIGN KEY (`ped_id`) REFERENCES `pedidos` (`ped_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detalle_pedidos_ibfk_2` FOREIGN KEY (`pro_id`) REFERENCES `productos` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  ADD CONSTRAINT `detalle_ventas_ibfk_1` FOREIGN KEY (`ven_id`) REFERENCES `ventas` (`ven_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detalle_ventas_ibfk_2` FOREIGN KEY (`pro_id`) REFERENCES `productos` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `ingresos`
+--
+ALTER TABLE `ingresos`
+  ADD CONSTRAINT `ingresos_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `productos` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`cli_id`) REFERENCES `clientes` (`cli_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `precios`
+--
+ALTER TABLE `precios`
+  ADD CONSTRAINT `precios_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `productos` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `precios_ibfk_2` FOREIGN KEY (`uni_id`) REFERENCES `unidades` (`uni_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `fk_productos_lineas` FOREIGN KEY (`lin_id`) REFERENCES `lineas` (`lin_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_productos_marcas1` FOREIGN KEY (`mar_id`) REFERENCES `marcas` (`mar_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`cli_id`) REFERENCES `clientes` (`cli_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

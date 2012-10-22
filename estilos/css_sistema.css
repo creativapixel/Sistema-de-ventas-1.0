@@ -1,0 +1,132 @@
+body,html {
+			width:100%;
+			height:100%;
+			font-family:Arial, Helvetica, sans-serif;
+			font-size:11px;
+			padding: 0px;
+			margin: 0px;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			color:#006699;
+			background-image:url(../imagenes/lin_fondo.jpg);
+			background-attachment:fixed;
+			
+			/*estilo de barras de desplazamiento*/
+			scrollbar-face-color: #A8D8FB; 
+			
+			scrollbar-shadow-color: #A8D8FB; 
+			scrollbar-highlight-color: #A8D8FB; 
+			scrollbar-3dlight-color: #A8D8FB; 
+			scrollbar-darkshadow-color: #A8D8FB; 
+			scrollbar-arrow-color: #006699;	
+					
+			scrollbar-track-color: #C9E7FA; 
+ 
+}
+
+.titulo{
+	font-size:14px;
+	font-weight:bold;
+	}
+
+.subtitulos{
+	color:#795200;
+	font-size:12px;
+	font-weight: bold;
+
+
+}
+
+a:link {
+	text-decoration: none;
+
+	
+}
+a:active {
+	text-decoration:none;
+		
+}
+a:visited {
+	text-decoration: none;
+		
+}
+a:hover {
+		text-decoration: underline;
+		
+}
+
+
+
+#botonesmenu{
+		background-image:url(../archivos/boton.jpg);
+		height:25px;
+		text-align:center;
+		font-weight:bold;
+}
+
+
+.vinculoblanco{
+color: #FFFFFF
+}
+.fondonegro{
+/*background-color:#333333;*/
+background-image:url(../imagenes/fondo_barragrid.jpg);
+color:#FFFFFF;
+}
+
+input{ 
+	font-family:Arial, Helvetica, sans-serif;
+	border:1px solid #006699;
+}
+textarea{
+overflow:auto;
+border: 1px  solid #006699;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+
+}
+select { 
+font-family: Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#003333;
+background-color:#FFFFCC;
+/*background-color: #666666;*/
+
+border:1px solid #333333;
+border-bottom-color:#333333;
+border-color:#333333;
+
+border-top-width: 1px;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-left-width: 1px
+}
+h3{
+color:#663300;
+font-size:20px;
+
+}
+
+.textoblanco{
+color:#FFFFFF;
+}
+
+.enfasis{
+
+	font-weight: bold;
+}
+.anchoframe{
+width:100%;
+}
+
+input.btn{
+   color:#996600;
+   font-family:Arial, Helvetica, sans-serif;
+   font-size:11px;
+   font-weight:bold;
+
+   background-color:#fed;
+
+   filter:progid:DXImageTransform.Microsoft.Gradient
+      (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffeeddaa');
+}
